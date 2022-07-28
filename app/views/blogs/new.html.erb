@@ -1,0 +1,12 @@
+<h1>新增網誌</h1>
+
+<%= form_tag "/blogs" do %>
+  標題：
+  <input type="text" name="title">
+
+  內容：
+  <textarea name="content"></textarea>
+
+  <input type="submit" value="新增">
+<% end %>
+
