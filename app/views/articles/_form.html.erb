@@ -1,8 +1,8 @@
-<% if @article.errors.any? %>
-  <%= @article.errors.full_messages %>
+<% if article.errors.any? %>
+  <%= article.errors.full_messages %>
 <% end %>
 
-<%= form_for @article do |form|%>
+<%= form_for article do |form|%>
   標題：
   <%= form.text_field :title %>
   內容：
