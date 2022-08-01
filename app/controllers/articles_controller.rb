@@ -1,4 +1,6 @@
 class ArticlesController < ApplicationController
+  before_action :find_article, only: [:show, :edit, :update, :destroy]
+
   def create
     @article = Article.new(article_params)
 
@@ -6,18 +8,34 @@ class ArticlesController < ApplicationController
       redirect_to "/"
     else
       render "blogs/new"
-      # 借 app/views/blogs/new.html.erb 來用
-
-      # redirect_to "/blogs/new"
     end
   end
 
   def show
-    @article = Article.find(params[:id])
+  end
+
+  def edit
+  end
+
+  def update
+    if @article.update(article_params)
+      redirect_to blogs_path
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    @article.destroy
+    redirect_to blogs_path
   end
 
   private
   def article_params
     params.require(:article).permit(:title, :content)
+  end
+
+  def find_article
+    @article = Article.find(params[:id])
   end
 end
