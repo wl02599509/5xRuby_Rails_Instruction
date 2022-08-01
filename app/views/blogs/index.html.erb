@@ -1,3 +1,20 @@
 <h1>文章列表</h1>
 
-<a href="/blogs/new">新增文章</a>
+<%= link_to "新增文章", new_blog_path %>
+
+<table>
+  <thead>
+    <tr>
+      <td>標題</td>
+      <td>其他功能</td>
+    </tr>
+  </thead>
+  <tbody>
+    <% @articles.each do |article| %>
+    <tr>
+      <td><%= link_to article.title, article %></td>
+      <td><%= link_to "編輯", edit_article_path(article) %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
