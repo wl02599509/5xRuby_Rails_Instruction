@@ -17,4 +17,14 @@ class User < ApplicationRecord
     self.password = Digest::SHA1.hexdigest(pw)
   end
   
+  def self.login(user_params)
+    email = user_params[:email]
+    pw = user_params[:password]
+    
+    hashed_password = Digest::SHA1.hexdigest("xx-#{pw}-yy")
+
+    find_by(email: email, password: hashed_password)
+  end
+
+
 end

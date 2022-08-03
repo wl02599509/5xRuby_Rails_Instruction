@@ -11,7 +11,7 @@
   </head>
 
   <body>
-    <%= notice %>
+    <%= render 'flash/flash' if notice %>
     <%= yield %>
   </body>
 </html>
