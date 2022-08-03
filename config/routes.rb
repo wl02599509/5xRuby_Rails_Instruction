@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   resources :blogs
   resources :articles
-  resource :user, except: [:destroy, :new] do
+  resource :users, except: [:destroy, :new] do
     get :sign_up
   end
 end
