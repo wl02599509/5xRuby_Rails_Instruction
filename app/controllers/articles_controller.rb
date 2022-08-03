@@ -5,7 +5,7 @@ class ArticlesController < ApplicationController
     @article = Article.new(article_params)
 
     if @article.save
-      redirect_to "/"
+      redirect_to "/", notice: "文章新增成功"
     else
       render "blogs/new"
     end
@@ -19,7 +19,7 @@ class ArticlesController < ApplicationController
 
   def update
     if @article.update(article_params)
-      redirect_to blogs_path
+      redirect_to blogs_path, notice: "文章更新成功"
     else
       render :edit
     end
@@ -27,7 +27,7 @@ class ArticlesController < ApplicationController
 
   def destroy
     @article.destroy
-    redirect_to blogs_path
+    redirect_to blogs_path, notice: "文章已刪除"
   end
 
   private
