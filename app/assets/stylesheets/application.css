@@ -20,3 +20,11 @@
 .field_with_errors input {
   border: 1px solid red
 }
+
+.flash {
+  background-color: lightblue;
+  font-size: 20px;
+  display: inline-block;
+  padding: 10px;
+  border-radius: 10px;
+}
