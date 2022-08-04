@@ -1,5 +1,5 @@
 class BlogsController < ApplicationController
-  include UsersHelper
+  before_action :require_login, only: [:new]
   
   def index
     @articles = Article.all
@@ -9,11 +9,6 @@ class BlogsController < ApplicationController
   end
 
   def new
-    if user_sign_in?
-      @article = Article.new
-    else
-      redirect_to sign_in_users_path
-    end
+    @article = Article.new
   end
-
 end

@@ -1,0 +1,11 @@
+<nav>
+  <ul>
+    <% if user_sign_in? %>
+      <li><%= current_user.email %></li>
+      <li><%= link_to '登出', sessions_path, method: 'delete', data: {confirm: '確定登出嗎？'} %></li>
+    <% else %>
+      <li><%= link_to "登入", sign_in_users_path %></li>
+      <li><%= link_to "註冊", sign_up_users_path %></li>
+    <% end %>
+  </ul>
+</nav>

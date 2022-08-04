@@ -11,15 +11,7 @@
   </head>
 
   <body>
-    <nav>
-      <ul>
-        <li><%= link_to "登入", sign_in_users_path %></li>
-        <li><%= link_to "註冊", sign_up_users_path %></li>
-        <% if user_sign_in? %>
-          <li><%= current_user.email %></li>
-        <% end %>
-      </ul>
-    </nav>
+    <%= render 'partial_layout/nav' %>
     <%= render 'flash/flash' if notice %>
     <%= yield %>
   </body>

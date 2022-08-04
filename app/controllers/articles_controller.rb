@@ -1,5 +1,7 @@
+# Authentication 認證  -->  手上有session、手上有卡進出補習班
+# Authorization 授權  --> 但未被授權編輯其他人文章、進出其他教室
 class ArticlesController < ApplicationController
-
+  before_action :require_login, except: [:show]
   before_action :find_article, only: [:show, :edit, :update, :destroy]
 
   def show
