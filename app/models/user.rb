@@ -1,4 +1,8 @@
 class User < ApplicationRecord
+  # relationship
+  has_many :articles
+
+  # validations
   validates :email, 
              presence: true,
              uniqueness: true
@@ -8,7 +12,7 @@ class User < ApplicationRecord
              length: { minimum: 6 },
              confirmation: true
 
-  #callback
+  # callback
   before_create :encrypt_password
 
   def encrypt_password
@@ -25,6 +29,8 @@ class User < ApplicationRecord
 
     find_by(email: email, password: hashed_password)
   end
+
+
 
 
 end

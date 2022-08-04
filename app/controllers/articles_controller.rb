@@ -2,13 +2,19 @@
 # Authorization 授權  --> 但未被授權編輯其他人文章、進出其他教室
 class ArticlesController < ApplicationController
   before_action :require_login, except: [:show]
-  before_action :find_article, only: [:show, :edit, :update, :destroy]
+  before_action :find_article, only: [:edit, :update, :destroy]
+
 
   def show
+    @article = Article.find(params[:id])
   end
 
   def create
-    @article = Article.new(article_params)
+
+    # @article = Article.new(article_params)
+    # @article.user = current_user
+
+    @article = current_user.articles.new(article_params)
 
     if @article.save
       redirect_to about_path, notice: '新增成功！'
@@ -29,7 +35,8 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
-    @article.destroy
+    # @article.destroy
+    @article.update(deleted_at: Time.current)
     redirect_to blogs_path, notice: '刪除成功！'
   end
 
@@ -40,7 +47,9 @@ class ArticlesController < ApplicationController
 
   def find_article
     # @article = Article.find_by(id: params[:id])
-    @article = Article.find(params[:id])
+    @article = current_user.articles.find(params[:id])
   end
+
+
 
 end
