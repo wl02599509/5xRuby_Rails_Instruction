@@ -2,6 +2,8 @@ class SessionsController < ApplicationController
   def create
     user = User.login(params[:user])
     
+    
+    
     if user
       #發號碼牌 發 session
       session[:user_session] = user.id
