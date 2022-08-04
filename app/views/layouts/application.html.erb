@@ -15,12 +15,11 @@
       <ul>
         <li><%= link_to "登入", sign_in_users_path %></li>
         <li><%= link_to "註冊", sign_up_users_path %></li>
-        <% if session[:user_session] %>
-          <li>email</li>
+        <% if user_sign_in? %>
+          <li><%= current_user.email %></li>
         <% end %>
       </ul>
     </nav>
-    User: <%= current_user.email %>
     <%= render 'flash/flash' if notice %>
     <%= yield %>
   </body>
