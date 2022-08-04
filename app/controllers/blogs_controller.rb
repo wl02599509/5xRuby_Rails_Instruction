@@ -2,7 +2,7 @@ class BlogsController < ApplicationController
   before_action :authenticate_user!, only: [:new]
 
   def index
-    @articles = Article.all
+    @articles = Article.where(deleted_at: nil).order(id: :desc)
   end
 
   def new

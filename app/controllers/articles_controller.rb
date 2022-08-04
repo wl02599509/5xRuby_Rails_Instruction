@@ -1,9 +1,9 @@
 class ArticlesController < ApplicationController
   before_action :authenticate_user!, except: [:show]
-  before_action :find_article, only: [:show, :edit, :update, :destroy]
+  before_action :find_user_article, only: [:edit, :update, :destroy]
 
   def create
-    @article = Article.new(article_params)
+    @article = current_user.articles.new(article_params)
 
     if @article.save
       redirect_to "/", notice: "文章新增成功"
@@ -13,6 +13,7 @@ class ArticlesController < ApplicationController
   end
 
   def show
+    @article = Article.find(params[:id])
   end
 
   def edit
@@ -27,7 +28,8 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
-    @article.destroy
+    # @article.destroy
+    @article.update(deleted_at: Time.current)
     redirect_to blogs_path, notice: "文章已刪除"
   end
 
@@ -36,7 +38,7 @@ class ArticlesController < ApplicationController
     params.require(:article).permit(:title, :content)
   end
 
-  def find_article
-    @article = Article.find(params[:id])
+  def find_user_article
+    @article = current_user.articles.find(params[:id])
   end
 end
