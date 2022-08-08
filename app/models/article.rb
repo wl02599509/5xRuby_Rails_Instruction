@@ -3,6 +3,7 @@ class Article < ApplicationRecord
 
   # relationships
   belongs_to :user
+  has_many :comments
 
   # validations
   validates :title, presence: true,

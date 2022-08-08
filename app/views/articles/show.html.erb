@@ -10,3 +10,21 @@
     <%= @article.content %>
   <% end %>
 </p>
+
+<section>
+  <h4>留言區</h4>
+  <%= form_with model: [@article, @comment] do |form| %>
+    <%= form.text_area :content %>
+    <%= form.submit "送出" %>
+  <% end %>
+
+<ul>
+  <% @comments.each do |comment| %>
+    <li>
+      <%= comment.content %>
+      <%= link_to "[X]", comment, method: "delete", data: {confirm: "確認刪除"} %>
+    </li>
+  <% end %>
+</ul>
+
+</section>
