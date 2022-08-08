@@ -1,14 +1,11 @@
 <h1><%= @article.title %></h1>
 
 <p>
-  <% if @article.pin_code.present? %>
-    <% if session[:unlock_articles]&.include?(params[:id].to_i) %>
-      <%= @article.content %>
-    <% else %>
-      <%= form_with url: unlock_article_path(@article), method: "patch" do |form| %>
-        輸入密碼：<%= form.text_field :pin_code %>
-        <%= form.submit "解鎖" %>
-      <% end %>
+  <% if is_locked?(@article) %>
+    <%= form_with url: unlock_article_path(@article), method: "patch" do |form| %>
+      <% form.label :pin_code %>
+      <%= form.text_field :pin_code %>
+      <%= form.submit "解鎖" %>
     <% end %>
   <% else %>
     <%= @article.content %>
