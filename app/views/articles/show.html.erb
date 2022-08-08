@@ -1,5 +1,15 @@
 <h1><%= @article.title %></h1>
 
-<p><%= @article.content %></p>
+<p>
+  <% if @article.pin_code.present? %>
+    <%= form_with url: unlock_article_path(@article), method: "patch" do |form| %>
+      輸入密碼：<%= form.text_field :pin_code %>
+      <%= form.submit "解鎖" %>
+    <% end %>
+
+  <% else %>
+    <%= @article.content %>
+  <% end %>
+</p>
 
 <%= link_to "返回", blogs_path %>
