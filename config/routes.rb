@@ -8,6 +8,8 @@ Rails.application.routes.draw do
       patch :unlock
     end 
   end
+  # patch :unlock, on: :member
+
   resource :sessions, only: [:create, :destroy]
 
   resource :users, except: [:destroy, :new] do
