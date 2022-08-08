@@ -1,6 +1,14 @@
 <h1><%= @article.title %></h1>
 
 <p>
-  <%= @article.content %>
+  <% if @article.pincode.present? %>
+    <%= form_with url: unlock_article_path(@article), method: "patch" do |f| %>
+      輸入密碼：<%= f.text_field :pincode %>
+      <%= f.submit "解鎖" %>
+    <% end %>
+
+  <% else %>
+    <%= @article.content %>
+  <% end %>
 </p>
 
