@@ -1,11 +1,13 @@
 # Authentication 認證  -->  手上有session、手上有卡進出補習班
 # Authorization 授權  --> 但未被授權編輯其他人文章、進出其他教室
 class ArticlesController < ApplicationController
-  before_action :require_login, except: [:show, :unlock]
+  before_action :authenticate_user!, except: [:show, :unlock]
   before_action :find_user_article, only: [:edit, :update, :destroy]
   before_action :find_article, only: [:show, :unlock]
-
+    
   def show
+    @comment = Comment.new
+    @comments = @article.comments.order(id: :desc)
   end
 
   def create

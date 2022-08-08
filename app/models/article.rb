@@ -1,6 +1,7 @@
 class Article < ApplicationRecord
   # relationship
   belongs_to :user
+  has_many :comments
   
   # validations
   validates :title, presence: true

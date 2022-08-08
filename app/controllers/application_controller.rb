@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
     session[:user_session] && current_user
   end
 
-  def require_login
+  def authenticate_user!
     redirect_to sign_in_users_path if !user_sign_in?
   end
 end

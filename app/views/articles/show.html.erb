@@ -12,4 +12,24 @@
   <% end %>
 </p>
 
+
+
+<section>
+  <h2>留言區</h2>
+  <% @comments.each do |comment| %>
+    <ul>
+      <li>
+        <%= comment.content %>
+        <%= link_to "[x]", comment_path(comment.id), method: 'delete', data: {confirm: '刪除'} %>
+      </li>
+    </ul>
+  <% end %>
+
+  <%= form_with model: @comment, url: article_comments_path(@article) do |form| %>
+    <%= form.text_area :content %>
+    <%= form.submit '留言' %>
+  <% end %>
+</section>
+
+
 <%= link_to "返回", blogs_path %>

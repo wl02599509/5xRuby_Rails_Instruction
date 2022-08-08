@@ -1,5 +1,5 @@
 class BlogsController < ApplicationController
-  before_action :require_login, only: [:new]
+  before_action :authenticate_user!, only: [:new]
   
   def index
     @articles = Article.order(id: :desc)

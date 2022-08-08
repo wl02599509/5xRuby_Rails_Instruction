@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   # relationship
   has_many :articles
+  has_many :comments
 
   # validations
   validates :email, 

@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   get '/about', to: "welcome#about"
 
   resources :blogs
+
   resources :articles do
+    resources :comments, shallow: true, only: [:create, :destroy]
     member do
       patch :unlock
     end 
