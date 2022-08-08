@@ -2,11 +2,14 @@
 
 <p>
   <% if @article.pin_code.present? %>
-    <%= form_with url: unlock_article_path(@article), method: "patch" do |form| %>
-      輸入密碼：<%= form.text_field :pin_code %>
-      <%= form.submit "解鎖" %>
+    <% if session[:unlock_articles]&.include?(params[:id].to_i) %>
+      <%= @article.content %>
+    <% else %>
+      <%= form_with url: unlock_article_path(@article), method: "patch" do |form| %>
+        輸入密碼：<%= form.text_field :pin_code %>
+        <%= form.submit "解鎖" %>
+      <% end %>
     <% end %>
-
   <% else %>
     <%= @article.content %>
   <% end %>

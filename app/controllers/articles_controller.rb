@@ -1,12 +1,11 @@
 # Authentication 認證  -->  手上有session、手上有卡進出補習班
 # Authorization 授權  --> 但未被授權編輯其他人文章、進出其他教室
 class ArticlesController < ApplicationController
-  before_action :require_login, except: [:show]
-  before_action :find_article, only: [:edit, :update, :destroy]
-
+  before_action :require_login, except: [:show, :unlock]
+  before_action :find_user_article, only: [:edit, :update, :destroy]
+  before_action :find_article, only: [:show, :unlock]
 
   def show
-    @article = Article.find(params[:id])
   end
 
   def create
@@ -39,16 +38,36 @@ class ArticlesController < ApplicationController
     redirect_to blogs_path, notice: '刪除成功！'
   end
 
+  def unlock
+    if @article.pin_code == params[:pin_code]
+      set_unlock_articles(@article.id)
+      redirect_to article_path(@article.id)
+    else
+      redirect_to article_path(@article), notice: '密碼錯誤'
+    end
+  end
+
   private
   def article_params
     params.require(:article).permit(:title, :content, :pin_code)
   end
 
-  def find_article
+  def find_user_article
     # @article = Article.find_by(id: params[:id])
     @article = current_user.articles.find(params[:id])
   end
 
+  def find_article 
+    @article = Article.find(params[:id])
+  end
 
+  def set_unlock_articles(article_id)
+    if session[:unlock_articles]
+      session[:unlock_articles] << article_id
+      session[:unlock_articles].uniq!
+    else
+      session[:unlock_articles] = [article_id]
+    end
+  end
 
 end
