@@ -2,7 +2,7 @@ class BlogsController < ApplicationController
   before_action :require_login, only: [:new]
   
   def index
-    @articles = Article.where(deleted_at: nil).order(id: :desc)
+    @articles = Article.order(id: :desc)
     @ad_color_red = "Red"
     @ad_color_green = "green"
     @ad_color_orange = "orange"

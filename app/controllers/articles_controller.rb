@@ -35,14 +35,13 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
-    # @article.destroy
-    @article.update(deleted_at: Time.current)
+    @article.destroy
     redirect_to blogs_path, notice: '刪除成功！'
   end
 
   private
   def article_params
-    params.require(:article).permit(:title, :content)
+    params.require(:article).permit(:title, :content, :pin_code)
   end
 
   def find_article
