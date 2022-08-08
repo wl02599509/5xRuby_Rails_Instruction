@@ -1,4 +1,6 @@
 class Article < ApplicationRecord
+  acts_as_paranoid
+
   # relationships
   belongs_to :user
 

@@ -28,8 +28,7 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
-    # @article.destroy
-    @article.update(deleted_at: Time.current)
+    @article.destroy
     redirect_to blogs_path, notice: "文章已刪除"
   end
 
