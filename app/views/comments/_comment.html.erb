@@ -1,0 +1,4 @@
+<li>
+  <%= comment.content %>
+  <%= link_to "[x]", comment_path(comment.id), method: 'delete', data: {confirm: '刪除'} %>
+</li>
