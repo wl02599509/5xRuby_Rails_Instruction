@@ -1,9 +1,13 @@
 <h1><%= @article.title %></h1>
 
+<section data-controller="like" data-article-id="<%= @article.id %>">
+  <button data-action="click -> like#like_article">love</button>  
+</section>
+
+
 <p>
   <% if is_locked?(@article) %>
     <%= form_with url: unlock_article_path(@article), method: "patch" do |form| %>
-      <% form.label :pin_code %>
       <%= form.text_field :pin_code %>
       <%= form.submit "解鎖" %>
     <% end %>
@@ -12,23 +16,17 @@
   <% end %>
 </p>
 
-
-
 <section>
   <h2>留言區</h2>
-  <% @comments.each do |comment| %>
-    <ul>
-      <li>
-        <%= comment.content %>
-        <%= link_to "[x]", comment_path(comment.id), method: 'delete', data: {confirm: '刪除'} %>
-      </li>
-    </ul>
-  <% end %>
+  <ul class = "comment_list">
+    <%= render @comments %>
+  </ul>
 
-  <%= form_with model: @comment, url: article_comments_path(@article) do |form| %>
-    <%= form.text_area :content %>
+  <%= form_with model: @comment,local: false, url: article_comments_path(@article) do |form| %>
+    <div id = "comment-content"><%= form.text_area :content %></div>
     <%= form.submit '留言' %>
   <% end %>
+
 </section>
 
 

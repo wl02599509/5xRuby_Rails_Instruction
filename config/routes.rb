@@ -12,6 +12,16 @@ Rails.application.routes.draw do
   end
   # patch :unlock, on: :member
 
+  namespace :api do
+    namespace :v1 do
+      resources :articles, only: [] do
+        member do
+          post :like
+        end
+      end
+    end
+  end
+
   resource :sessions, only: [:create, :destroy]
 
   resource :users, except: [:destroy, :new] do

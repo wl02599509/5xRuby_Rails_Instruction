@@ -6,6 +6,8 @@ class ArticlesController < ApplicationController
   before_action :find_article, only: [:show, :unlock]
     
   def show
+    authenticate_user! if @article.pin_code.present?
+
     @comment = Comment.new
     @comments = @article.comments.order(id: :desc)
   end
