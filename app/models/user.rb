@@ -2,7 +2,10 @@ class User < ApplicationRecord
   # relationship
   has_many :articles
   has_many :comments
-
+  
+  has_many :like_articles
+  has_many :liked_articles, 
+            through: :like_articles, source: :article
   # validations
   validates :email, 
              presence: true,
