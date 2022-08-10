@@ -22,7 +22,7 @@ class ArticlesController < ApplicationController
     if @article.save
       redirect_to about_path, notice: '新增成功！'
     else
-      render :new
+      render '/blogs/new'
     end
   end
 
