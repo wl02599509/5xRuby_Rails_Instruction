@@ -1,6 +1,8 @@
 <h1><%= @article.title %></h1>
 
-<button id="likeBtn">☆</button>
+<section data-controller="like" data-article-id="<%= @article.id %>">
+  <button data-action="click->like#like_article">☆</button>
+</section>
 
 <%# <button>★</button> %>
 <p>
