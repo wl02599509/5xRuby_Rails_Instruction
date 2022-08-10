@@ -1,5 +1,8 @@
 <h1><%= @article.title %></h1>
 
+<button id="likeBtn">☆</button>
+
+<%# <button>★</button> %>
 <p>
   <% if is_locked?(@article) %>
     <%= form_with url: unlock_article_path(@article), method: "patch" do |f| %>

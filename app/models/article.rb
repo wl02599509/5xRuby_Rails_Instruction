@@ -4,6 +4,8 @@ class Article < ApplicationRecord
   # relationships
   belongs_to :user
   has_many :comments
+  has_many :like_articles
+  has_many :users, through: :like_articles
 
   # validations
   validates :title, presence: true,
