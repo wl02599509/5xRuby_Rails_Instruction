@@ -34,7 +34,9 @@ class User < ApplicationRecord
     find_by(email: email, password: hashed_password)
   end
 
-
+  def like?(article)
+    liked_articles.include?(article)
+  end
 
 
 end

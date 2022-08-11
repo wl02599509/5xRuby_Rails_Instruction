@@ -1,7 +1,16 @@
 class Api::V1::ArticlesController < ApplicationController
-  skip_before_action :verify_authenticity_token, only: [:like]
+  before_action :authenticate_user!
 
   def like
-    render json: {name: "kk", age: 18, id: params[:id]}
+    article = Article.find(params[:id])
+    
+    if current_user.liked_articles.include?(article)
+      current_user.liked_articles.destroy(article)
+      render json: {status: 'unliked', id: params[:id] }  
+    else
+      current_user.liked_articles << article
+      render json: {status: 'liked', id: params[:id]}
+    end
+
   end
 end
