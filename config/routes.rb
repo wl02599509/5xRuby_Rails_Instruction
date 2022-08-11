@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
-  root "blogs#index"
+  root "pages#home"
   get "/about", to: "pages#about"
 
-  resources :blogs
+  get "/@:handler/blogs/", to: "blogs#show"
+  get "/@:handler/blogs/:id", to: "articles#show"
+
   resources :articles do
     resources :comments, shallow: true, only: [:create, :destroy]
 
@@ -29,5 +31,5 @@ Rails.application.routes.draw do
     get :sign_in
   end
 
-  get "/:id", to: "blogs#show"
+  get "/@:handler", to: "blogs#show"
 end
