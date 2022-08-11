@@ -28,6 +28,10 @@ class User < ApplicationRecord
     find_by(email: email, password: hashed_password)
   end
 
+  def liked?(article)
+    liked_articles.include?(article)
+  end
+
   private
 
   def encrypt_password
