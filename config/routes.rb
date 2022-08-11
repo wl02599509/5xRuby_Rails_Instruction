@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   get '/', to: "welcome#home"
   get '/about', to: "welcome#about"
 
+  get "/@:handler/blogs/", to: "blogs#show"
+  get "/@:handler/blogs/:id", to: "articles#show"
+  
   resources :blogs
 
   resources :articles do
@@ -28,5 +31,7 @@ Rails.application.routes.draw do
     get :sign_up
     get :sign_in
   end
+
+  get '/@:handler', to: "blogs#show"
 end
 

@@ -1,10 +1,22 @@
 # Authentication 認證  -->  手上有session、手上有卡進出補習班
 # Authorization 授權  --> 但未被授權編輯其他人文章、進出其他教室
 class ArticlesController < ApplicationController
-  before_action :authenticate_user!, except: [:show, :unlock]
+  before_action :authenticate_user!, except: [:index, :show, :unlock]
   before_action :find_user_article, only: [:edit, :update, :destroy]
   before_action :find_article, only: [:show, :unlock]
-    
+   
+  def index
+    @articles = Article.order(id: :desc)
+  
+    # @ad_color_red = "Red"
+    # @ad_color_green = "green"
+    # @ad_color_orange = "orange"
+  end
+
+  def new
+    @article = Article.new
+  end
+
   def show
     authenticate_user! if @article.pin_code.present?
 

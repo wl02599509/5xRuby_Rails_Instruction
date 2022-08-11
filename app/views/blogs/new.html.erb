@@ -1,5 +1,20 @@
-<h1>新增文章</h1>
+<h1>新增 Blog</h1>
 
-<%= render 'articles/form', article: @article %>
+<%= form_with model: @blog do |form| %>
+  <div>
+    <%= form.label :handler %>
+    <%= form.text_field :handler %>
+  </div>
+  <div>
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+  <div>
+    <%= form.label :description %>
+    <%= form.text_field :description %>
+  </div>
 
+  <%= form.submit %>
+<% end %>
 
+<%= link_to %>
