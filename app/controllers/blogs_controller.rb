@@ -1,11 +1,24 @@
 class BlogsController < ApplicationController
-  before_action :authenticate_user!, only: [:new]
+  before_action :authenticate_user!, except: [:show]
 
-  def index
-    @articles = Article.order(id: :desc)
+  def show
+    # /:id
   end
 
   def new
-    @article = Article.new
+    @blog = Blog.new
+  end
+
+  def create
+    render html: params
+  end
+
+  def edit
+  end
+
+  def update
+  end
+
+  def destroy
   end
 end

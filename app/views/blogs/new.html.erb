@@ -1,3 +1,16 @@
-<h1>新增網誌</h1>
+<h1>新增 Blog</h1>
 
-<%= render "articles/form", article: @article %>
+你還沒有自己的 Blog，趕快新增一個吧！
+
+<%= form_with model: @blog do |form|%>
+  <div>
+    Blog識別碼: <%= form.text_field :handler%>
+  </div>
+  <div>
+    站名: <%= form.text_field :title%>
+  </div>
+  <div>
+    說明: <%= form.text_area :description%>
+  </div>
+  <%= form.submit "新增" %>
+<% end %>

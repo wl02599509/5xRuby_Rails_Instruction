@@ -28,4 +28,6 @@ Rails.application.routes.draw do
     get :sign_up
     get :sign_in
   end
+
+  get "/:id", to: "blogs#show"
 end

@@ -7,7 +7,6 @@
           data-action="click->like#like_article">☆</button>
 </section>
 
-<%# <button></button> %>
 <p>
   <% if is_locked?(@article) %>
     <%= form_with url: unlock_article_path(@article), method: "patch" do |f| %>

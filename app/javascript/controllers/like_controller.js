@@ -5,11 +5,11 @@ export default class extends Controller {
   static targets = ["likeButton"]
 
   connect() {
-    if (this.element.dataset.liked === "true") {
-      this.likeButtonTarget.textContent = "★"
-    } else {
-      this.likeButtonTarget.textContent = "☆"
-    }
+    this.setLiked(this.element.dataset.liked === "true")
+  }
+
+  setLiked(flag) {
+    this.likeButtonTarget.textContent = flag ? "★" : "☆"
   }
 
   like_article() {
@@ -19,11 +19,7 @@ export default class extends Controller {
       url: `/api/v1/articles/${articleID}/like`,
       type: "post",
       success: ({ state }) => {
-        if (state === "liked") {
-          this.likeButtonTarget.textContent = "★"
-        } else {
-          this.likeButtonTarget.textContent = "☆"
-        }
+        this.setLiked(state === "liked")
       },
       error: (err) => {
         console.log(err)

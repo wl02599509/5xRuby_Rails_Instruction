@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   # relationships
+  has_one :blog
   has_many :articles
   has_many :comments
   has_many :like_articles
