@@ -1,20 +1,5 @@
 <h1>新增 Blog</h1>
 
-<%= form_with model: @blog do |form| %>
-  <div>
-    <%= form.label :handler %>
-    <%= form.text_field :handler %>
-  </div>
-  <div>
-    <%= form.label :title %>
-    <%= form.text_field :title %>
-  </div>
-  <div>
-    <%= form.label :description %>
-    <%= form.text_field :description %>
-  </div>
+<%= render "form", blog: @blog, url: create_blogs_path %>
 
-  <%= form.submit %>
-<% end %>
-
-<%= link_to %>
+<%= link_to "返回 blog", blogs_path(current_user.blog.handler) %>

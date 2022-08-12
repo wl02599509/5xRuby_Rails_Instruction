@@ -2,11 +2,17 @@ Rails.application.routes.draw do
   get '/', to: "welcome#home"
   get '/about', to: "welcome#about"
 
-  get "/@:handler/blogs/", to: "blogs#show"
-  get "/@:handler/blogs/:id", to: "articles#show"
-  
-  resources :blogs
+  # blogs
+  scope "/@:handler" do
+    resource :blogs, except: [:new, :create]
+  end
 
+  resource :blogs, only: [] do
+    get :new, as: "new"
+    post :create, as: "create"
+  end
+
+  # articles
   resources :articles do
     resources :comments, shallow: true, only: [:create, :destroy]
     member do
@@ -25,13 +31,14 @@ Rails.application.routes.draw do
     end
   end
 
+  #sessions
   resource :sessions, only: [:create, :destroy]
 
+  #users
   resource :users, except: [:destroy, :new] do
     get :sign_up
     get :sign_in
   end
 
-  get '/@:handler', to: "blogs#show"
 end
 

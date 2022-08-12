@@ -2,6 +2,11 @@
   <ul>
     <% if user_sign_in? %>
       <li><%= current_user.email %></li>
+      <li><%= link_to "Home_page", "/" %></li>
+      <li><%= link_to "Blog", blogs_path(handler: current_user.blog&.handler) if current_user.blog.present? %></li>
+      <li><%= link_to "Photo", "#" %></li>
+      <li><%= link_to "編輯", edit_blogs_path(handler: current_user.blog&.handler) if current_user.blog.present? %></li>
+      <li><%= link_to "新增文章", new_article_path %></li>
       <li><%= link_to '登出', sessions_path, method: 'delete', data: {confirm: '確定登出嗎？'} %></li>
     <% else %>
       <li><%= link_to "登入", sign_in_users_path %></li>

@@ -1,0 +1,5 @@
+<h1>編輯部落格</h1>
+
+<%= render "form", blog: @blog, url: blogs_path(handler: current_user.blog.handler)  %>
+
+<%= link_to "返回 blog", blogs_path(current_user.blog.handler) %>

@@ -29,9 +29,17 @@ class BlogsController < ApplicationController
   end
 
   def edit
+    @blog = current_user.blog
   end
 
   def update
+    @blog = current_user.blog
+
+    if @blog.update(blog_params)
+      redirect_to blogs_path(handler: @blog.handler), notice: '更新成功！'
+    else
+      render :edit
+    end
   end
 
   def destroy
@@ -40,6 +48,15 @@ class BlogsController < ApplicationController
   private
   
   def blog_params
-    params.require(:blog).permit(:handler, :title, :description)
+    # 避免讓不可被修改的 handler 被他人透過網頁端新增欄位進行修改。 
+    if action_name != "update"
+      params.require(:blog).permit(:handler, :title, :description)
+    else
+      params.require(:blog).permit(:title, :description)
+    end
+  end
+
+  def find_blog
+    @blog = Blog.find_by!(handler: params[:handler])
   end
 end

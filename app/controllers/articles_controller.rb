@@ -32,9 +32,9 @@ class ArticlesController < ApplicationController
     @article = current_user.articles.new(article_params)
 
     if @article.save
-      redirect_to about_path, notice: '新增成功！'
+      redirect_to blogs_path(handler: current_user.blog.handler), notice: '新增成功！'
     else
-      render '/blogs/new'
+      render :new
     end
   end
 

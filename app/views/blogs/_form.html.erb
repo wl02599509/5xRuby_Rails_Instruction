@@ -1,0 +1,20 @@
+<%= form_with model: @blog, url: url do |form| %>
+  <div>
+    <% if blog.new_record? %>
+      <%= form.label :handler %>
+      <%= form.text_field :handler %>
+    <% else %>
+      <%= blog.handler %> (不可編輯)
+    <% end %>
+  </div>
+  <div>
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+  <div>
+    <%= form.label :description %>
+    <%= form.text_field :description %>
+  </div>
+
+  <%= form.submit %>
+<% end %>
