@@ -1,17 +1,26 @@
-<nav>
-  <ul>
+<nav class="py-2 border-b-2 border-gray-500">
+  <ul class="flex justify-between">
     <% if user_signed_in? %>
-      <li><%= current_user.email %></li>
-      <li>
-        <%= link_to "Blog", blogs_path(handler: current_user.blog&.handler) if current_user.blog.present? %>
-        <%= link_to "編輯", edit_blogs_path(handler: current_user.blog&.handler) if current_user.blog.present? %>
-        <%= link_to "新增文章", new_article_path %>
-      </li>
-      <li><%= link_to "Photo", "#" if current_user.blog.present? %></li>
-      <li><%= link_to "登出", sessions_path, method: "delete" %></li>
+      <div class="flex">
+        <li>
+          <%= link_to "Blog", blogs_path(handler: current_user.blog&.handler) if current_user.blog.present? %>
+          <%= link_to "編輯", edit_blogs_path(handler: current_user.blog&.handler) if current_user.blog.present? %>
+          <%= link_to "新增文章", new_article_path %>
+        </li>
+        <li><%= link_to "Photo", "#" if current_user.blog.present? %></li>
+      </div>
+      <div class="flex">
+        <li class="mr-2"><%= current_user.email %></li>
+        <li class="mr-1"><%= link_to "登出", sessions_path, method: "delete" %></li>
+      </div>
     <% else %>
-      <li><%= link_to "登入", sign_in_users_path %></li>
-      <li><%= link_to "註冊", sign_up_users_path %></li>
+      <div>
+        <li><%= link_to "首頁", "/" %></li>
+      </div>
+      <div class="flex">
+        <li class="mr-3"><%= link_to "登入", sign_in_users_path %></li>
+        <li><%= link_to "註冊", sign_up_users_path %></li>
+      </div>
     <% end %>
   </ul>
 </nav>
