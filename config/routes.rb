@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
+
   root "pages#home"
   get "/about", to: "pages#about"
 
-  get "/@:handler/blogs/", to: "blogs#show"
-  get "/@:handler/blogs/:id", to: "articles#show"
+  scope "/@:handler" do
+    resource :blogs, except: [:new, :create]
+  end
+  resource :blogs, only: [:new, :create]
 
   resources :articles do
     resources :comments, shallow: true, only: [:create, :destroy]

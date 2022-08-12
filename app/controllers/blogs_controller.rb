@@ -29,6 +29,7 @@ class BlogsController < ApplicationController
   end
 
   def edit
+    @blog = current_user.blog
   end
 
   def update
@@ -42,5 +43,4 @@ class BlogsController < ApplicationController
   def blog_params
     params.require(:blog).permit(:handler, :title, :description)
   end
-
 end
