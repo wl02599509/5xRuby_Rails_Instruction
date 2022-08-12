@@ -4,7 +4,7 @@ class BlogsController < ApplicationController
   def show
     @blog = Blog.find_by!(handler: params[:handler])
 
-    @articles = @blog.user.articles.order(id: :desc)
+    @articles = @blog.user.articles.order(id: :desc).page(params[:page]).per(2)
   end
 
   def new
