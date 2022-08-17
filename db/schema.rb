@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_17_041356) do
+ActiveRecord::Schema.define(version: 2022_08_17_061922) do
 
   create_table "articles", force: :cascade do |t|
     t.string "title"
@@ -67,6 +67,17 @@ ActiveRecord::Schema.define(version: 2022_08_17_041356) do
     t.index ["user_id"], name: "index_like_articles_on_user_id"
   end
 
+  create_table "orders", force: :cascade do |t|
+    t.string "serial"
+    t.integer "price"
+    t.string "state"
+    t.integer "user_id", null: false
+    t.text "note"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email"
     t.string "password"
@@ -83,4 +94,5 @@ ActiveRecord::Schema.define(version: 2022_08_17_041356) do
   add_foreign_key "comments", "users"
   add_foreign_key "like_articles", "articles"
   add_foreign_key "like_articles", "users"
+  add_foreign_key "orders", "users"
 end

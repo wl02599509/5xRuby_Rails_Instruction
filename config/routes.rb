@@ -8,6 +8,13 @@ Rails.application.routes.draw do
   end
   resource :blogs, only: [:new, :create]
 
+  resource :plans, only: [:show]
+  resources :orders, except: [:edit, :update, :destroy] do
+    member do
+      delete :cancel
+    end
+  end
+
   resources :articles do
     resources :comments, shallow: true, only: [:create, :destroy]
 
