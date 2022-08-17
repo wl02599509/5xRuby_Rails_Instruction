@@ -3,22 +3,24 @@ class Order < ApplicationRecord
 
   belongs_to :user
 
-  validates :serial, :price, :state, presence: true
+  validates :price, :state, presence: true
+
+  before_create :create_serial
 
   aasm column: "state", no_direct_assignment: true do
     state :pending, initial: true
-    state :paid, :refunded, :cancelled, :fail
+    state :paid, :refunded, :cancelled, :failed
 
     event :pay do
-      transitions from: [:pending, :fail], to: :paid
+      transitions from: [:pending, :failed], to: :paid
     end
 
     event :fail do
-      transitions from: :pending, to: :fail
+      transitions from: :pending, to: :failed
     end
 
     event :cancel do
-      transitions from: [:pending, :fail] , to: :cancelled
+      transitions from: [:pending, :failed] , to: :cancelled
     end
 
     event :refund do
@@ -26,4 +28,14 @@ class Order < ApplicationRecord
     end
   end
 
+  private
+  def create_serial
+    # "ORD20220815XXXXXX(0~9a-zA-Z)"
+    now = Time.now
+
+    self.serial = "ORD%d%02d%02d%s" % [now.year,
+                                       now.month,
+                                       now.day,
+                                       SecureRandom.alphanumeric(6)]
+  end
 end
