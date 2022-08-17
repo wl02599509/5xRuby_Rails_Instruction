@@ -1,6 +1,10 @@
 class Api::V1::ArticlesController < ApplicationController
   before_action :authenticate_user!
 
+  def not_available_dates
+    render json: ["2022-08-20", "2022-08-21", "2022-08-22"]
+  end
+
   def like
     article = Article.find(params[:id])
 

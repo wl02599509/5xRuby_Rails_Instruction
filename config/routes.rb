@@ -20,6 +20,10 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :articles, only: [] do
+        collection do
+          get :not_available_dates
+        end
+
         member do
           post :like
         end

@@ -8,19 +8,22 @@
 
 <%= form_for article do |form| %>
   <div>
-  標題：
-  <%= form.text_field :title %>
+    標題：<%= form.text_field :title %>
   </div>
 
   <div>
-  內容：
-  <%= form.text_area :content %>
+    發佈日期：<%= form.text_field :publish_at, data: {
+      controller: "datepicker"
+    } %>
   </div>
 
   <div>
-  密碼：
-  <%= form.text_field :pincode %>
-  貼心小提示：如不需設定，可留白即可
+    內容：<%= form.text_area :content %>
+  </div>
+
+  <div>
+    密碼：<%= form.text_field :pincode %>
+    貼心小提示：如不需設定，可留白即可
   </div>
 
   <%= form.submit %>
