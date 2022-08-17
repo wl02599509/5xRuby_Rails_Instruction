@@ -21,5 +21,6 @@ ActiveStorage.start()
 
 
 import "controllers"
+import "stylesheets"
 
 
