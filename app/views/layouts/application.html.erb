@@ -11,8 +11,10 @@
   </head>
 
   <body>
+  <main class="mx-auto w-4/6">
     <%= render 'partial_layout/nav' %>
     <%= render 'flash/flash' if notice %>
     <%= yield %>
+  </main>
   </body>
 </html>

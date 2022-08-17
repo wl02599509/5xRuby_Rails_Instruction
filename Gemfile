@@ -60,3 +60,6 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'paranoia', '~> 2.6'
 
+group :development, :test do
+  gem 'rspec-rails', '~> 5.0', '>= 5.0.2'
+end
