@@ -1,0 +1,13 @@
+<h1>付錢囉 <%= @order.serial %></h1>
+
+<%= form_with url: pay_order_path(id: @order.serial), 
+              method: 'post', 
+              data: { 
+                controller: 'braintree', 
+                token: @token } do |form| %>
+
+<span data-braintree-target="payment"></span>
+
+<%= form.submit '交出錢錢'%>
+
+<% end %>

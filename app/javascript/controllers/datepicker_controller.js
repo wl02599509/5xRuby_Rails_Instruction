@@ -12,6 +12,7 @@ export default class extends Controller {
       type: "get",
       success: (disable) => {
         console.log(datePicker)
+        console.log(disable)
         datePicker.set({ disable: disable })
         // picker(this.element, {
         //   disable: disable,
