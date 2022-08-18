@@ -3,14 +3,28 @@
 <% end %>
 
 <%= form_for article do |form|%>
-  標題：
-  <%= form.text_field :title %>
-  內容：
-  <%= form.text_area :content %>
-  密碼：
-  <%= form.text_field :pin_code %>
-  note: 如不需設定，空白即可。
-  <%= form.submit %>
+  <div>
+    標題：
+    <%= form.text_field :title %>
+  </div>
+  <div>
+    發布時間:
+    <%= form.text_field :publish_at, data: {
+      controller: "datepicker"
+    }%>
+  </div>
+  <div>
+    內容：
+    <%= form.text_area :content %>
+  </div>
+  <div>
+    <%= form.label :pin_code, '密碼' %>
+    <%= form.text_field :pin_code %>
+    note: 如不需設定，空白即可。
+  </div>
+  <div>
+    <%= form.submit '新增文章' %>  
+  </div>
 <% end %>
 
 <%= link_to '返回', about_path %>

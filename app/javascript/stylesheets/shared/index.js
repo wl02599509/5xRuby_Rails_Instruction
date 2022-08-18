@@ -1,1 +1,1 @@
-import "./flash.scss"
+import "./flash"

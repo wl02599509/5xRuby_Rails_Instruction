@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_11_074538) do
+ActiveRecord::Schema.define(version: 2022_08_17_041408) do
 
   create_table "articles", force: :cascade do |t|
     t.string "title"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 2022_08_11_074538) do
     t.integer "user_id"
     t.time "deleted_at"
     t.string "pin_code"
+    t.datetime "publish_at"
     t.index ["deleted_at"], name: "index_articles_on_deleted_at"
     t.index ["user_id"], name: "index_articles_on_user_id"
   end

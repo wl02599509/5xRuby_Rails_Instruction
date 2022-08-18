@@ -63,3 +63,5 @@ gem 'paranoia', '~> 2.6'
 group :development, :test do
   gem 'rspec-rails', '~> 5.0', '>= 5.0.2'
 end
+
+gem 'braintree', '~> 4.8.0'
